@@ -1,4 +1,4 @@
-name: Trigger Visit Counter
+name: Trigger Visit Counter # test
 
 on:
   workflow_dispatch:
