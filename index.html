@@ -138,6 +138,29 @@ img {
     }
 </script>
 <script>
+(function() {
+    // Αν ο χρήστης έχει ήδη μετρηθεί σε αυτό το session, σταμάτα
+    if (sessionStorage.getItem("visitCounted")) {
+        return;
+    }
+
+    // Κάνε trigger το GitHub Action (χωρίς token)
+    fetch("https://api.github.com/repos/dxmix77/UnderWay/actions/workflows/trigger.yml/dispatches", {
+        method: "POST",
+        headers: {
+            "Accept": "application/vnd.github+json",
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            ref: "main"
+        })
+    });
+
+    // Σημείωσε ότι ο χρήστης μετρήθηκε
+    sessionStorage.setItem("visitCounted", "true");
+})();
+</script>   
+<script>
 // ------------------------------
 // 1. Bot Filtering
 // ------------------------------
