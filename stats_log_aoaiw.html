@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Private Analytics Dashboard</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 40px;
+    background: #fafafa;
+  }
+  h1 { margin-bottom: 10px; }
+  .metric {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    display: inline-block;
+  }
+</style>
+</head>
+<body>
+
+<h1>Private Analytics Dashboard</h1>
+
+<div class="metric">
+  <strong>Global Unique Visitors:</strong>
+  <span id="globalUnique">Loading...</span>
+</div>
+
+<div class="metric">
+  <strong>Daily Unique Visitors (Today):</strong>
+  <span id="dailyUnique">Loading...</span>
+</div>
+
+<canvas id="dailyChart" width="800" height="400"></canvas>
+
+<script>
+// Load JSON files
+async function loadJSON(path) {
+  const response = await fetch(path + "?v=" + Date.now());
+  return await response.json();
+}
+
+async function init() {
+  const unique = await loadJSON("analytics/unique.json");
+  const daily = await loadJSON("analytics/daily.json");
+
+  // Global unique visitors
+  document.getElementById("globalUnique").textContent =
+    unique.fingerprints.length;
+
+  // Daily unique visitors
+  const today = new Date().toISOString().slice(0, 10);
+  const todayCount = daily[today] ? daily[today].length : 0;
+  document.getElementById("dailyUnique").textContent = todayCount;
+
+  // Prepare chart data
+  const labels = Object.keys(daily).sort();
+  const values = labels.map(date => daily[date].length);
+
+  // Render bar chart
+  new Chart(document.getElementById("dailyChart"), {
+    type: "bar",
+    data: {
+      labels: labels,
+      datasets: [{
+        label: "Daily Unique Visitors",
+        data: values,
+        backgroundColor: "rgba(54, 162, 235, 0.6)"
+      }]
+    },
+    options: {
+      scales: {
+        y: { beginAtZero: true }
+      }
+    }
+  });
+}
+
+init();
+</script>
+
+</body>
+</html>
