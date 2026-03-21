@@ -1,0 +1,48 @@
+name: Apply Visit Batch
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"   # Κάθε 5 λεπτά
+
+jobs:
+  apply-batch:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Apply pending visits
+        run: |
+          # Αν δεν υπάρχει pending file, δεν κάνουμε τίποτα
+          if [ ! -f pending_visits.txt ]; then
+            echo "No pending visits"
+            exit 0
+          fi
+
+          PENDING=$(cat pending_visits.txt)
+
+          if [ "$PENDING" -eq 0 ]; then
+            echo "No visits to apply"
+            exit 0
+          fi
+
+          # Διάβασε το visits.json
+          CURRENT=$(jq '.visits' visits.json)
+
+          # Νέο σύνολο
+          TOTAL=$((CURRENT + PENDING))
+
+          # Γράψε το visits.json
+          echo "{\"visits\": $TOTAL}" > visits.json
+
+          # Καθάρισε το pending file
+          echo 0 > pending_visits.txt
+
+      - name: Commit updated counter
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add visits.json pending_visits.txt
+          git commit -m "Applied $PENDING visits at $(date)"
+          git push
