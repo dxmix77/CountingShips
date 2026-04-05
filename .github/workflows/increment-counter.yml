@@ -1,0 +1,32 @@
+name: Increment Counter
+
+on:
+  workflow_dispatch:
+
+jobs:
+  update-counter:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Read counter
+        id: read
+        run: |
+          if [ ! -f counter.txt ]; then echo 0 > counter.txt; fi
+          CURRENT=$(cat counter.txt)
+          echo "current=$CURRENT" >> $GITHUB_OUTPUT
+
+      - name: Increment counter
+        run: |
+          NEW=$(( ${{ steps.read.outputs.current }} + 1 ))
+          echo $NEW > counter.txt
+
+      - name: Commit changes
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add counter.txt
+          git commit -m "Increment counter to $NEW" || echo "No changes"
+          git push
