@@ -51,7 +51,7 @@ https://pod.gr/diavolodekaetia/	255	551
 https://drive.google.com/file/d/12VxLWqfxMs5NSlYmzE2SKtVXN9bqe7Hs/view?usp=drive_link	1076	31
 https://drive.google.com/file/d/12VxLWqfxMs5NSlYmzE2SKtVXN9bqe7Hs/view?usp=drive_link	1135	28
 https://drive.google.com/file/d/12VxLWqfxMs5NSlYmzE2SKtVXN9bqe7Hs/view?usp=drive_link	1180	25
-https://www.facebook.com/reel/1579086873164476	1201	190
+https://www.facebook.com/reel/1579086873164476	1022	20
 https://diadima.com	43	414
 https://diadima.com	91	415
 https://diadima.com	152	418
@@ -68,3 +68,10 @@ https://www.instagram.com/diogenis.papadopoulos	852	685
 https://xartino-karavi.gr/el/	245	151
 https://www.facebook.com/xartinokaravibookstore	277	269
 https://www.instagram.com/xartino_karavi/	207	302
+https://drive.google.com/file/d/1BTID2FPbktxm0ggKlTYH_DBseiNsi4dO/view?usp=sharing	1123	97
+https://drive.google.com/file/d/1ivohA3tEXjTlWeJCfQHI3-JvzrZ7YftO/view?usp=sharing	1218	693
+https://x.com/atrupar/status/2041938818920481157	1022	51
+https://www.youtube.com/watch?v=wpKeiJdS6XA	978	95
+https://www.youtube.com/watch?v=wpKeiJdS6XA	1010	97
+https://www.youtube.com/watch?v=wpKeiJdS6XA	974	133
+https://www.youtube.com/watch?v=wpKeiJdS6XA	1028	137
