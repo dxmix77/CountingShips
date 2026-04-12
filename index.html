@@ -158,7 +158,7 @@ document.getElementById("bg-image").clientWidth || ORIGINAL_WIDTH;
        return (HOTSPOT_SIZE_PX / ORIGINAL_WIDTH) * renderedWidth;
      }
 
-function createHotspot(url, x, y, id) {
+function createHotspot(url, x, y) {
   const container = document.getElementById("image-container");
   const hotspot = document.createElement("div");
   hotspot.className = "hotspot";
